@@ -59,5 +59,6 @@ CREATE TABLE [dbo].[OrderDetail] (
     FOREIGN KEY ([ProductID]) REFERENCES [dbo].[Product] ([ProductID]),
     FOREIGN KEY ([OrderID]) REFERENCES [dbo].[Order] ([OrderID])
 );
-
+ALTER TABLE [dbo].[OrderDetail] ADD TEST INT;
+ALTER TABLE [dbo].[OrderDetail] DROP COLUMN TEST;
 ALTER AUTHORIZATION ON DATABASE::MyStore TO sa;

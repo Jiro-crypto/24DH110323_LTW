@@ -7,10 +7,10 @@
       <Diagram DiagramId="3c3c11a6b76f4f13ba5ea818d3db93ac" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="MyStoreModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MyStoreModel.Customer" Width="1.5" PointX="3.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyStoreModel.Order" Width="1.5" PointX="5.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Order" Width="1.5" PointX="6.125" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MyStoreModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyStoreModel.sysdiagrams" Width="1.5" PointX="9.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.sysdiagrams" Width="1.5" PointX="10.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyStoreModel.User" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="MyStoreModel.FK_Pro_Category" ManuallyRouted="false" />
         <AssociationConnector Association="MyStoreModel.FK__Order__CustomerI__4BAC3F29" ManuallyRouted="false" />
