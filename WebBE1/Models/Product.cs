@@ -11,13 +11,18 @@ namespace WebBE1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Net.NetworkInformation;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
             this.OrderDetail = new HashSet<OrderDetail>();
+            ProductImage = "~/Content/Image/default_img.png";
         }
     
         public int ProductID { get; set; }
@@ -30,5 +35,9 @@ namespace WebBE1.Models
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
+
+        [RegularExpression(@"[a-zA-Z0-9\s_\\.\-:]+(.jpg|.jpeg|.png|.gif)$", ErrorMessage = "Chi chap nhan cac dinh dang anh PNG, JPG va GIF")]
+        [NotMapped]
+        public HttpPostedFile UploadImg { get; set; }
     }
 }
