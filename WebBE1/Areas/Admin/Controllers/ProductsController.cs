@@ -4,10 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
 using WebBE1.Models;
-using System.IO;
+using WebBE1.Models.ViewModel;
+using PagedList.Mvc;
+using PagedList;
 
 namespace WebBE1.Areas.Admin.Controllers
 {
@@ -16,10 +19,57 @@ namespace WebBE1.Areas.Admin.Controllers
         private MyStoreEntities db = new MyStoreEntities();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm, decimal? minPrice, decimal? maxPrice, string sortOrder, int? page)
         {
-            var product = db.Product.Include(p => p.Category);
-            return View(product.ToList());
+            var model = new ProductSearchVm();
+            var products = db.Product.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                model.SearchTerm = searchTerm;
+                products = products.Where(p => p.ProductName.Contains(searchTerm) || 
+                p.ProductDescription.Contains(searchTerm) ||
+                p.Category.CategoryName.Contains(searchTerm));
+            }
+            //Tìm kiếm sản phẩm dựa trên giá tối thiểu
+            if (minPrice.HasValue)
+            {
+                model.MinPrice = minPrice.Value;
+                products = products.Where(p => p.ProductPrice >= minPrice.Value);
+            }
+            //Tìm kiếm sản phẩm dựa trên giá tối đa
+            if (maxPrice.HasValue)
+            {
+                model.MaxPrice = maxPrice.Value;
+                products = products.Where(p => p.ProductPrice <= maxPrice.Value);
+            }
+
+            switch (sortOrder)
+            {
+                case "price_asc":
+                    products = products.OrderBy(p => p.ProductPrice);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.ProductPrice);
+                    break;
+                case "name_asc":
+                    products = products.OrderBy(p => p.ProductName);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.ProductName);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.ProductName);
+                    break;
+            }
+            model.SortOrder = sortOrder;
+
+            int pageNumber = page ?? 1;
+            int pageSize = 2
+                ;
+            //model.Products = products.ToList();
+            model.Products = products.ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
         // GET: Admin/Products/Details/5
@@ -49,7 +99,7 @@ namespace WebBE1.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductDescription,ProductPrice,ProductImage, UploadImg")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductDescription,ProductPrice,ProductImage")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -83,18 +133,10 @@ namespace WebBE1.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductDescription,ProductPrice,ProductImage, UploadImg")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,ProductDescription,ProductPrice,ProductImage")] Product product)
         {
             if (ModelState.IsValid)
             {
-                if (product.UploadImg != null)
-                {
-                    string filename = Path.GetFileName(product.UploadImg.FileName);
-                    string savePath = "~/Content/images/";
-                    product.ProductImage = savePath + filename;
-                    product.UploadImg.SaveAs(Path.Combine(Server.MapPath(savePath), filename));
-                }
-
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -12,9 +12,9 @@ namespace WebBE1.Models
     using System;
     using System.Collections.Generic;
     using System.Net.NetworkInformation;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-    using System.ComponentModel.DataAnnotations.Schema;
+    //using System.ComponentModel.DataAnnotations;
+    //using System.Web;
+    //using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Product
     {
@@ -36,8 +36,5 @@ namespace WebBE1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
 
-        [RegularExpression(@"[a-zA-Z0-9\s_\\.\-:]+(.jpg|.jpeg|.png|.gif)$", ErrorMessage = "Chi chap nhan cac dinh dang anh PNG, JPG va GIF")]
-        [NotMapped]
-        public HttpPostedFile UploadImg { get; set; }
     }
 }
