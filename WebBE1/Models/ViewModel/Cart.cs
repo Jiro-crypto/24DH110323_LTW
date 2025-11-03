@@ -16,7 +16,7 @@ namespace WebBE1.Models.ViewModel
         public void AddItem(int productId, string productImage, string productName, decimal unitPrice, int quantity, string category)
         {
             var existingItem = items.FirstOrDefault(i => i.ProductID == productId);
-            if (existingItem != null)
+            if (existingItem == null)
             {
                 items.Add(new CartItem
                 {

@@ -73,7 +73,7 @@
                             @foreach (var item in Model.Items)
                              {
                                 <tr>
-                                    <td><img sec="@item.ProductImage" alt="@item.ProductName" style="max-height:80px;" /></td>
+                                    <td><img src="@item.ProductImage" alt="@item.ProductName" style="max-height:80px;" /></td>
                                     <td class="col-md-3">@item.ProductName</td>
                                     <td>
                                         @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post))
@@ -87,7 +87,7 @@
 
                                     <td>@item.UnitPrice.ToString("N0")</td>
                                     <td>@item.TotalPrice.ToString("N0")</td>
-                                    <td><a hred="@Url.Action("RemoveFromCart", "Cart", new { id = item.ProductID })">
+                                    <td><a href="@Url.Action("RemoveFromCart", "Cart", new { id = item.ProductID })">
                                             <img src="~/Images/remove.png" style="max-height:20px;" />
                                         </a>
                                     </td>
