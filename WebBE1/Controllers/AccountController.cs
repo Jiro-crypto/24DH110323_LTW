@@ -38,7 +38,7 @@ namespace WebBE1.Controllers
                 {
                     Username = model.Username,
                     Password = model.Password,
-                    UserRole = "Customer"
+                    UserRole = "C"
                 };
                 db.User.Add(user);
                 var customer = new Customer
@@ -71,7 +71,7 @@ namespace WebBE1.Controllers
             {
                 var user = db.User.SingleOrDefault(u => u.Username == model.Username
                          && u.Password == model.Password
-                         && u.UserRole == "Customer");
+                         && u.UserRole == "C");
                 if (user != null)
                 {
                     //Lưu trạng thái đăng nhập vào sesion

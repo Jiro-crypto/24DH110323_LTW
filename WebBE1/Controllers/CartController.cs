@@ -58,5 +58,10 @@ namespace WebBE1.Controllers
             cartService.GetCart().UpdateQuantity(id, quantity);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Checkout()
+        {
+            return View();
+        }
     }
 }
