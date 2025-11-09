@@ -46,7 +46,7 @@
         form.appendChild(quantityInput);
 
         document.body.appendChild(form);
-        form.sumbit();
+        form.submit();
     }
 </script>
 
@@ -79,9 +79,9 @@
                                         @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post))
                                          {
                                             <input type="hidden" name="id" value="@item.ProductID" />
-                                            <button type="button" style="width: 20px;" onclick="cartUpdateQuantity(@item.ProductID, @item.Quantity - 1)">-</button>
+                                            <button type="button" style="width: 20px;" onclick="cartUpdateQuantity(@item.ProductID,@item.Quantity - 1)">-</button>
                                             <input type="number" name="quantity" value="@item.Quantity" min="1" max="100" style="width: 40px; text-align:right;" readonly />
-                                            <button type="button" style="width: 20px;" onclick="cartUpdateQuantity(@item.ProductID, @item.Quantity + 1)">+</button>
+                                            <button type="button" style="width: 20px;" onclick="cartUpdateQuantity(@item.ProductID,@item.Quantity + 1)">+</button>
                                          }
                                     </td>
 
@@ -100,7 +100,7 @@
 
                 <div class="col-md-3 cart-section">
                     <div><strong>Tổng giá trị: &nbsp;<span style="color: red;">@Model.TotalValue().ToString("N0")</span></strong></div>
-                    <div>@Html.ActionLink("Mua hàng", "Checkout", "Cart", null, new { @class= "btn btn-danger cart-button"})</div>
+                    <div>@Html.ActionLink("Mua hàng", "Checkout", "Order", null, new { @class= "btn btn-danger cart-button"})</div>
                 </div>
             }
 </div>

@@ -13,7 +13,7 @@ namespace WebBE1.Models.ViewModel
 
         //Các thuộc tính hỗ trợ phân trang
         public int PageNumber { get; set; } //Trang hiện tại
-        public int PageSize { get; set; } = 10; //Số mục trên mỗi trang
+        public int PageSize { get; set; } = 5; //Số mục trên mỗi trang
 
         //danh sách sản phẩm nổi bật
         public List<Product> FeaturedProducts { get; set; }
