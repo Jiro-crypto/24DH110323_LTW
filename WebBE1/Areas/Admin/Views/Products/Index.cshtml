@@ -47,16 +47,16 @@
         <div class="form-group order-container">
              sắp xếp theo:
             @Html.ActionLink("Tên tăng dần", "Index",
-                 new { sortOder = "name_asc", searchTerm = Model.SearchTerm })
+                 new { sortOder = "name_asc", SearchTerm = Model.SearchTerm })
             |
             @Html.ActionLink("Tên giảm dần", "Index",
-                 new { sortOder = "name_desc", searchTerm = Model.SearchTerm })
+                 new { sortOder = "name_desc", SearchTerm = Model.SearchTerm })
             |
             @Html.ActionLink("Giá tăng dần", "Index",
-                 new { sortOder = "price_asc", searchTerm = Model.SearchTerm })
+                 new { sortOder = "price_asc", SearchTerm = Model.SearchTerm })
             |
             @Html.ActionLink("Giá giảm dần", "Index",
-                 new { sortOder = "price_desc", searchTerm = Model.SearchTerm })
+                 new { sortOder = "price_desc", SearchTerm = Model.SearchTerm })
         </div>
      }
 
